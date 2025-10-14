@@ -1,5 +1,6 @@
 import prompt
 
+
 def welcome():
     """
     Приветственная функция.
