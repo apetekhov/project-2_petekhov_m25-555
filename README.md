@@ -34,3 +34,7 @@ $ project
 
 Введите команду: exit
 Выход из программы...
+
+## Демонстрация работы программы
+
+[![asciicast](https://asciinema.org/a/bilWPp963RfAAYCnqLYBRuXrQ.svg)](https://asciinema.org/a/bilWPp963RfAAYCnqLYBRuXrQ)
