@@ -1,6 +1,6 @@
 [project]
 name = "project-2-petekhov-m25-555"
-version = "0.1.1"
+version = "0.1.2"
 description = ""
 authors = [
     {name = "Artem Petekhov",email = "apetekhov@gmail.com"}
