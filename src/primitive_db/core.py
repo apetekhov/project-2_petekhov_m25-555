@@ -1,8 +1,11 @@
 from typing import Any
 
+from src.primitive_db.decorators import handle_db_errors
+
 VALID_TYPES = {"int", "str", "bool"}
 
 
+@handle_db_errors
 def create_table(metadata, table_name, columns):
     """Создает таблицу с указанными столбцами."""
     if table_name in metadata:
@@ -28,6 +31,7 @@ def create_table(metadata, table_name, columns):
     return metadata
 
 
+@handle_db_errors
 def drop_table(metadata, table_name):
     """Удаляет таблицу из метаданных."""
     if table_name not in metadata:
@@ -80,6 +84,7 @@ def _next_id(rows: list[dict]) -> int:
     return max(int(r["ID"]) for r in rows) + 1
 
 
+@handle_db_errors
 def insert(
     metadata: dict, 
     table_name: str, 
@@ -121,6 +126,7 @@ def _match_where(row: dict, where: dict | None) -> bool:
     return True
 
 
+@handle_db_errors
 def select(rows: list[dict], where: dict | None = None) -> list[dict]:
     """Вернуть все строки или отфильтрованные по where (словари с равенством)."""
     if not where:
@@ -128,6 +134,7 @@ def select(rows: list[dict], where: dict | None = None) -> list[dict]:
     return [r for r in rows if _match_where(r, where)]
 
 
+@handle_db_errors
 def update(
     rows: list[dict], 
     set_clause: dict, 
@@ -142,6 +149,7 @@ def update(
     return rows, count
 
 
+@handle_db_errors
 def delete(rows: list[dict], where: dict | None = None) -> tuple[list[dict], int]:
     """Удалить строки по where, вернуть (rows, count)."""
     if not where:
