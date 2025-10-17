@@ -18,3 +18,17 @@ def handle_db_errors(func: Callable) -> Callable:
         except Exception as e:
             print(f"Произошла непредвиденная ошибка: {e}")
     return wrapper
+
+def confirm_action(action_name: str) -> Callable:
+    """Декоратор для подтверждения опасных действий."""
+    def decorator(func: Callable) -> Callable:
+        def wrapper(*args, **kwargs):
+            answer = input(
+                f'Вы уверены, что хотите выполнить "{action_name}"? [y/n]: '
+            ).strip().lower()
+            if answer != "y":
+                print("Операция отменена пользователем.")
+                return None
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator

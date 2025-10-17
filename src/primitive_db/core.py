@@ -1,6 +1,6 @@
 from typing import Any
 
-from src.primitive_db.decorators import handle_db_errors
+from src.primitive_db.decorators import confirm_action, handle_db_errors
 
 VALID_TYPES = {"int", "str", "bool"}
 
@@ -32,6 +32,7 @@ def create_table(metadata, table_name, columns):
 
 
 @handle_db_errors
+@confirm_action("удаление таблицы")
 def drop_table(metadata, table_name):
     """Удаляет таблицу из метаданных."""
     if table_name not in metadata:
@@ -150,6 +151,7 @@ def update(
 
 
 @handle_db_errors
+@confirm_action("удаление таблицы")
 def delete(rows: list[dict], where: dict | None = None) -> tuple[list[dict], int]:
     """Удалить строки по where, вернуть (rows, count)."""
     if not where:
