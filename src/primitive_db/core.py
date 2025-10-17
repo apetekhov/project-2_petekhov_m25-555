@@ -1,6 +1,6 @@
 from typing import Any
 
-from src.primitive_db.decorators import confirm_action, handle_db_errors
+from src.primitive_db.decorators import confirm_action, handle_db_errors, log_time
 
 VALID_TYPES = {"int", "str", "bool"}
 
@@ -86,6 +86,7 @@ def _next_id(rows: list[dict]) -> int:
 
 
 @handle_db_errors
+@log_time
 def insert(
     metadata: dict, 
     table_name: str, 
@@ -128,6 +129,7 @@ def _match_where(row: dict, where: dict | None) -> bool:
 
 
 @handle_db_errors
+@log_time
 def select(rows: list[dict], where: dict | None = None) -> list[dict]:
     """Вернуть все строки или отфильтрованные по where (словари с равенством)."""
     if not where:
