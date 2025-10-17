@@ -1,5 +1,5 @@
 import time
-from typing import Callable
+from typing import Any, Callable
 
 
 def handle_db_errors(func: Callable) -> Callable:
@@ -44,3 +44,17 @@ def log_time(func: Callable) -> Callable:
         print(f"Функция {func.__name__} выполнилась за {elapsed:.3f} секунд.")
         return result
     return wrapper
+
+def create_cacher() -> Callable:
+    """Создает функцию для кэширования результатов."""
+    cache: dict[str, Any] = {}
+
+    def cache_result(key: str, value_func: Callable[[], Any]) -> Any:
+        if key in cache:
+            print(f"(из кэша) Запрос '{key}' найден.")
+            return cache[key]
+        result = value_func()
+        cache[key] = result
+        return result
+
+    return cache_result

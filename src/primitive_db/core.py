@@ -1,6 +1,13 @@
 from typing import Any
 
-from src.primitive_db.decorators import confirm_action, handle_db_errors, log_time
+from src.primitive_db.decorators import (
+    confirm_action,
+    create_cacher,
+    handle_db_errors,
+    log_time,
+)
+
+cache_result = create_cacher()
 
 VALID_TYPES = {"int", "str", "bool"}
 
@@ -131,10 +138,11 @@ def _match_where(row: dict, where: dict | None) -> bool:
 @handle_db_errors
 @log_time
 def select(rows: list[dict], where: dict | None = None) -> list[dict]:
-    """Вернуть все строки или отфильтрованные по where (словари с равенством)."""
-    if not where:
-        return rows
-    return [r for r in rows if _match_where(r, where)]
+    key = "all" if where is None else str(sorted(where.items()))
+    return cache_result(
+        key, 
+        lambda: [r for r in rows if _match_where(r, where)] if where else rows,
+    )
 
 
 @handle_db_errors
