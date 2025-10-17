@@ -161,7 +161,7 @@ def update(
 
 
 @handle_db_errors
-@confirm_action("удаление таблицы")
+@confirm_action("удаление записей")
 def delete(rows: list[dict], where: dict | None = None) -> tuple[list[dict], int]:
     """Удалить строки по where, вернуть (rows, count)."""
     if not where:
