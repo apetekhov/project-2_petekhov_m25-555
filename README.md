@@ -10,20 +10,20 @@
    ```bash
    git clone https://github.com/apetekhov/project-2_petekhov_m25-555.git
    cd project-2_petekhov_m25-555
-Установите зависимости через Poetry:
-
-bash
-poetry install
-Соберите и установите пакет:
-
-bash
-make build
-python3 -m pip install dist/*.whl
-Запустите базу данных:
-
-bash
-database
-```
+   ```
+2. Установите зависимости через Poetry:
+   ```bash
+   poetry install
+   ```
+3. Соберите и установите пакет:
+   ```bash
+   make build
+   python3 -m pip install dist/*.whl
+   ```
+4. Запустите базу данных:
+   ```bash
+   database
+   ```
 
 ## Управление таблицами
 
