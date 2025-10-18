@@ -29,7 +29,9 @@ def confirm_action(action_name: str) -> Callable:
             ).strip().lower()
             if answer != "y":
                 print("Операция отменена пользователем.")
-                return None
+                if args and isinstance(args[0], list):
+                    return args[0], 0
+                return args[0] if args else None
             return func(*args, **kwargs)
         return wrapper
     return decorator
