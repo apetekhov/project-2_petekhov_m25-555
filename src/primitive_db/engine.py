@@ -2,6 +2,7 @@ import shlex
 
 from prettytable import PrettyTable
 
+from src.primitive_db.constants import META_FILE
 from src.primitive_db.core import (
     create_table,
     drop_table,
@@ -25,8 +26,6 @@ from src.primitive_db.utils import (
     save_metadata,
     save_table_data,
 )
-
-META_FILE = "db_meta.json"
 
 
 def print_help() -> None:

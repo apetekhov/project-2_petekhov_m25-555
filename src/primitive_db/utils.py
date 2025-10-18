@@ -1,6 +1,8 @@
 import json
 import os
 
+from src.primitive_db.constants import DATA_DIR
+
 
 def load_metadata(filepath):
     """Загружает метаданные из JSON-файла."""
@@ -15,9 +17,6 @@ def save_metadata(filepath, data):
     """Сохраняет метаданные в JSON-файл."""
     with open(filepath, "w", encoding="utf-8") as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
-
-
-DATA_DIR = "data"
 
 
 def _ensure_data_dir() -> None:
